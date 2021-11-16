@@ -13,13 +13,13 @@ export class Usuario {
     public uid?: string,
   ) {}
 
-
   get imagenUrl() {
     // /uploads/usuarios/ac73616f-3022-4f72-a828-d1ceb737ad78.jpg
-    if (this.img?.includes('https')) {
+    if (!this.img) {
+      return `${base_url}/uploads/usuarios/no-image`;
+    } else if (this.img?.includes('https')) {
       return this.img;
-    }
-    if (this.img) {
+    } else if (this.img) {
       return `${base_url}/uploads/usuarios/${this.img}`;
     } else {
       return `${base_url}/uploads/usuarios/no-image`;
