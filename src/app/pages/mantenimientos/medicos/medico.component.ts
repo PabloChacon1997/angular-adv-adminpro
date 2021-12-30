@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { delay } from 'rxjs/operators';
 
 
 import { HospitalService } from '../../../services/hospital.service';
 import { Hospital } from '../../../models/hospital.model';
 import { MedicoService } from '../../../services/medico.service';
 import { Medico } from '../../../models/medico.model';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-medico',
@@ -77,9 +77,7 @@ export class MedicoComponent implements OnInit {
       }
       this.medicoService.editarMedico(data)
         .subscribe(resp => Swal.fire('Actualizado', `${nombre} actualizado correctamente`, 'success'))
-    } else {
-      
-      console.log(this.medicoForm.value);
+    } else {      
       this.medicoService.crearMedico(this.medicoForm.value)
         .subscribe((resp:any) => {
           Swal.fire('Creado', `${nombre} creado correctamente`, 'success');
